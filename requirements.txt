@@ -1,2 +1,8 @@
+# For handling CSV files and tabular data
 pandas==2.2.0
+
+# For numeric operations and data handling (optional but useful)
 numpy==1.27.0
+
+# Optional: Pretty printing tables in console (nice-to-have)
+tabulate==0.9.0
