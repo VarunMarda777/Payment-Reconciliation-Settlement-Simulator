@@ -1,12 +1,9 @@
 {
-  "name": "Payment Reconciliation Simulator",
-  "image": "mcr.microsoft.com/vscode/devcontainers/node:18",
-  "postCreateCommand": "npm install",
-  "forwardPorts": [3000],
-  "portsAttributes": {
-    "3000": {
-      "label": "Application",
-      "onAutoForward": "openPreview"
-    }
+  "name": "Payment Reconciliation Simulator (Python)",
+  "image": "mcr.microsoft.com/devcontainers/python:3.10",
+  "postCreateCommand": "pip install -r requirements.txt",
+  "forwardPorts": [],
+  "settings": {
+    "python.defaultInterpreterPath": "/usr/local/bin/python"
   }
 }
