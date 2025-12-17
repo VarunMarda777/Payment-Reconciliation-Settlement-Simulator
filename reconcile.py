@@ -1,4 +1,13 @@
 import csv
+import logging
+
+# ---------------- LOGGING CONFIGURATION ----------------
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(message)s"
+)
+logger = logging.getLogger(__name__)
+# ------------------------------------------------------
 
 PAYMENTS_FILE = "payments.csv"
 SETTLEMENTS_FILE = "settlements.csv"
@@ -9,15 +18,21 @@ def load_csv(file_name):
     Reads a CSV file and returns a dictionary
     with transaction_id as the key
     """
+    logger.info(f"Loading file: {file_name}")
+
     data = {}
     with open(file_name, newline="") as file:
         reader = csv.DictReader(file)
         for row in reader:
             data[row["transaction_id"]] = row
+
+    logger.info(f"Loaded {len(data)} records from {file_name}")
     return data
 
 
 def reconcile_payments(payments, settlements):
+    logger.info("Starting reconciliation process")
+
     matched = []
     amount_mismatch = []
     missing_settlements = []
@@ -32,21 +47,24 @@ def reconcile_payments(payments, settlements):
                 matched.append(txn_id)
             else:
                 amount_mismatch.append(txn_id)
+                logger.warning(f"Amount mismatch for transaction {txn_id}")
         else:
             if payment["status"] == "SUCCESS":
                 missing_settlements.append(txn_id)
+                logger.warning(f"Missing settlement for transaction {txn_id}")
 
     # Check settlements without payments
     for txn_id in settlements:
         if txn_id not in payments:
             extra_settlements.append(txn_id)
+            logger.warning(f"Extra settlement found for transaction {txn_id}")
+
+    logger.info("Reconciliation process completed")
 
     return matched, amount_mismatch, missing_settlements, extra_settlements
 
 
-print_report(matched, mismatch, missing, extra)
-print_summary(payments, settlements, matched, mismatch, missing, extra)
-
+def print_report(matched, mismatch, missing, extra):
     print("\nPAYMENT RECONCILIATION REPORT")
     print("=" * 40)
 
@@ -76,6 +94,8 @@ def print_summary(payments, settlements, matched, mismatch, missing, extra):
 
 
 def main():
+    logger.info("Payment Reconciliation Job Started")
+
     payments = load_csv(PAYMENTS_FILE)
     settlements = load_csv(SETTLEMENTS_FILE)
 
@@ -86,8 +106,8 @@ def main():
     print_report(matched, mismatch, missing, extra)
     print_summary(payments, settlements, matched, mismatch, missing, extra)
 
+    logger.info("Payment Reconciliation Job Finished")
+
 
 if __name__ == "__main__":
     main()
-
-
