@@ -1,3 +1,8 @@
+
+```md
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](
+https://github.com/codespaces/new?repo=VarunMarda777/Payment-Reconciliation-Settlement-Simulator
+)
 \# Payment Reconciliation \& Settlement Simulator
 ## 🚀 Run Instantly (No Installation Required)
 
@@ -45,6 +50,7 @@ This project simulates how fintech platforms reconcile customer payments with ba
 ```bash
 
 python reconcile.py
+
 
 
 
