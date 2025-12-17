@@ -1,4 +1,15 @@
 \# Payment Reconciliation \& Settlement Simulator
+## 🚀 Run Instantly (No Installation Required)
+
+This project can be run directly in the browser using **GitHub Codespaces**.
+
+### Steps:
+1. Click **Code**
+2. Select **Codespaces**
+3. Click **Create Codespace**
+4. Run:
+   ```bash
+   python reconcile.py
 
 
 
@@ -33,6 +44,7 @@ This project simulates how fintech platforms reconcile customer payments with ba
 ```bash
 
 python reconcile.py
+
 
 
 
