@@ -7,7 +7,8 @@ This project can be run directly in the browser using **GitHub Codespaces**.
 1. Click **Code**
 2. Select **Codespaces**
 3. Click **Create Codespace**
-4. Run:
+4. Wait for the environment to load
+5. In the terminal, Run:
    ```bash
    python reconcile.py
 
@@ -44,6 +45,7 @@ This project simulates how fintech platforms reconcile customer payments with ba
 ```bash
 
 python reconcile.py
+
 
 
 
