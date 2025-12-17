@@ -44,7 +44,9 @@ def reconcile_payments(payments, settlements):
     return matched, amount_mismatch, missing_settlements, extra_settlements
 
 
-def print_report(matched, mismatch, missing, extra):
+print_report(matched, mismatch, missing, extra)
+print_summary(payments, settlements, matched, mismatch, missing, extra)
+
     print("\nPAYMENT RECONCILIATION REPORT")
     print("=" * 40)
 
@@ -61,6 +63,18 @@ def print_report(matched, mismatch, missing, extra):
     print(extra or "None")
 
 
+def print_summary(payments, settlements, matched, mismatch, missing, extra):
+    print("\nSUMMARY")
+    print("-" * 40)
+
+    print(f"Total Payments           : {len(payments)}")
+    print(f"Total Settlements        : {len(settlements)}")
+    print(f"Matched Transactions     : {len(matched)}")
+    print(f"Amount Mismatches        : {len(mismatch)}")
+    print(f"Missing Settlements      : {len(missing)}")
+    print(f"Extra Settlements        : {len(extra)}")
+
+
 def main():
     payments = load_csv(PAYMENTS_FILE)
     settlements = load_csv(SETTLEMENTS_FILE)
@@ -70,7 +84,9 @@ def main():
     )
 
     print_report(matched, mismatch, missing, extra)
+    print_summary(payments, settlements, matched, mismatch, missing, extra)
 
 
 if __name__ == "__main__":
     main()
+
